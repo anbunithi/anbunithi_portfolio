@@ -1,1 +1,74 @@
 /* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.active-nav-link {
+    color: #38bdf8;
+    /* Tailwind's blue-400 */
+    font-weight: bold;
+    border-bottom: 2px solid #38bdf8;
+    /* Underline effect */
+    transition: all 0.3s ease-in-out;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* Menu hover and active state animations */
+.nav-link {
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.nav-link:after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background-color: #60a5fa; /* blue-400 */
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover:after {
+  width: 100%;
+}
+
+.nav-link.active {
+  color: #60a5fa; /* blue-400 */
+}
+
+.nav-link.active:after {
+  width: 100%;
+}
+
+/* Mobile menu animations */
+.mobile-menu {
+  transform-origin: top;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.mobile-menu.closed {
+  transform: scaleY(0);
+  opacity: 0;
+}
+
+.mobile-menu.open {
+  transform: scaleY(1);
+  opacity: 1;
+}
+
+.mobile-link {
+  transition: all 0.3s ease;
+  border-left: 0px solid transparent;
+  padding-left: 0.5rem;
+}
+
+.mobile-link:hover {
+  border-left: 4px solid #60a5fa; /* blue-400 */
+  padding-left: 1rem;
+  background-color: rgba(255, 255, 255, 0.1);
+}

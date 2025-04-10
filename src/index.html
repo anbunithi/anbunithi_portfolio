@@ -1,13 +1,447 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>AngularTailwindApp</title>
-  <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anbunithi AV - Angular Developer Portfolio</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body>
-  <app-root></app-root>
+<body class="bg-gray-100 font-sans" ng-app="portfolioApp" ng-controller="PortfolioController">
+  <!-- Navigation -->
+  <nav class="bg-gray-900 text-white shadow-lg fixed w-full z-10">
+    <div class="container mx-auto px-4">
+      <div class="flex justify-between items-center py-4">
+        <div>
+          <a href="#home" class="text-xl font-bold">{{developer.name}}</a>
+        </div>
+        <div class="hidden md:flex space-x-8">
+          <a href="#home" class="nav-link" ng-class="{'active': activeSection === 'home'}" ng-click="setActiveSection('home')">Home</a>
+          <a href="#about" class="nav-link" ng-class="{'active': activeSection === 'about'}" ng-click="setActiveSection('about')">About</a>
+          <a href="#skills" class="nav-link" ng-class="{'active': activeSection === 'skills'}" ng-click="setActiveSection('skills')">Skills</a>
+          <a href="#projects" class="nav-link" ng-class="{'active': activeSection === 'projects'}" ng-click="setActiveSection('projects')">Projects</a>
+          <a href="#experience" class="nav-link" ng-class="{'active': activeSection === 'experience'}" ng-click="setActiveSection('experience')">Experience</a>
+          <a href="#contact" class="nav-link" ng-class="{'active': activeSection === 'contact'}" ng-click="setActiveSection('contact')">Contact</a>
+        </div>
+        <div class="md:hidden">
+          <button ng-click="toggleMobileMenu()" class="focus:outline-none p-2 rounded-md hover:bg-gray-800 transition">
+            <i class="fas" ng-class="{'fa-bars': !mobileMenuOpen, 'fa-times': mobileMenuOpen}"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- Mobile menu -->
+    <div class="mobile-menu md:hidden bg-gray-800" ng-class="{'open': mobileMenuOpen, 'closed': !mobileMenuOpen}">
+      <a href="#home" class="mobile-link block py-3 px-4 hover:text-blue-400 transition" ng-class="{'text-blue-400': activeSection === 'home'}" ng-click="setActiveSection('home'); toggleMobileMenu()">Home</a>
+      <a href="#about" class="mobile-link block py-3 px-4 hover:text-blue-400 transition" ng-class="{'text-blue-400': activeSection === 'about'}" ng-click="setActiveSection('about'); toggleMobileMenu()">About</a>
+      <a href="#skills" class="mobile-link block py-3 px-4 hover:text-blue-400 transition" ng-class="{'text-blue-400': activeSection === 'skills'}" ng-click="setActiveSection('skills'); toggleMobileMenu()">Skills</a>
+      <a href="#projects" class="mobile-link block py-3 px-4 hover:text-blue-400 transition" ng-class="{'text-blue-400': activeSection === 'projects'}" ng-click="setActiveSection('projects'); toggleMobileMenu()">Projects</a>
+      <a href="#experience" class="mobile-link block py-3 px-4 hover:text-blue-400 transition" ng-class="{'text-blue-400': activeSection === 'experience'}" ng-click="setActiveSection('experience'); toggleMobileMenu()">Experience</a>
+      <a href="#contact" class="mobile-link block py-3 px-4 hover:text-blue-400 transition" ng-class="{'text-blue-400': activeSection === 'contact'}" ng-click="setActiveSection('contact'); toggleMobileMenu()">Contact</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="home" class="pt-24 pb-16 md:pt-32 md:pb-24 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
+    <div class="container mx-auto px-4">
+      <div class="flex flex-wrap items-center">
+        <div class="w-full md:w-2/3 mb-8 md:mb-0">
+          <h1 class="text-4xl md:text-5xl font-bold mb-4">{{developer.name}}</h1>
+          <h2 class="text-2xl md:text-3xl mb-6">{{developer.title}}</h2>
+          <p class="text-lg mb-8 max-w-lg">{{developer.summary}}</p>
+          <div class="flex space-x-4">
+            <a href="#contact" class="bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-blue-100 transition transform hover:scale-105">Contact Me</a>
+            <a href="#projects" class="border-2 border-white px-6 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition transform hover:scale-105">View Projects</a>
+          </div>
+        </div>
+        <div class="w-full md:w-1/3 flex justify-center">
+          <div class="w-64 h-64 rounded-full overflow-hidden border-4 border-white shadow-xl">
+            <img src="./assets/anbu.jpg" alt="Developer profile" class="w-full h-full object-cover">
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-bold mb-8 text-center">About Me</h2>
+      <div class="flex flex-wrap items-center">
+        <div class="w-full md:w-1/2 mb-8 md:mb-0">
+          <p class="text-lg mb-4" ng-repeat="paragraph in developer.about">{{paragraph}}</p>
+        </div>
+        <div class="w-full md:w-1/2 pl-0 md:pl-8">
+          <div class="bg-gray-100 p-6 rounded-lg shadow-md">
+            <h3 class="text-xl font-semibold mb-4">Career Highlights</h3>
+            <ul class="space-y-3">
+              <li ng-repeat="highlight in developer.highlights" class="flex items-start">
+                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                <span>{{highlight}}</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section id="skills" class="py-16 bg-gray-100">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-bold mb-8 text-center">Skills & Technologies</h2>
+      
+      <div class="mb-12">
+        <h3 class="text-xl font-semibold mb-6 text-center">Core Technologies</h3>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <div ng-repeat="skill in developer.coreSkills" class="bg-white p-6 rounded-lg shadow-md text-center hover:shadow-lg transition transform hover:scale-105">
+            <div class="text-4xl mb-3 text-blue-600">
+              <i class="{{skill.icon}}"></i>
+            </div>
+            <h4 class="font-semibold">{{skill.name}}</h4>
+            <div class="mt-2 flex justify-center">
+              <div class="w-24 h-2 bg-gray-200 rounded-full">
+                <div class="h-full bg-blue-600 rounded-full" ng-style="{'width': skill.level + '%'}"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div>
+        <h3 class="text-xl font-semibold mb-6 text-center">Additional Skills</h3>
+        <div class="flex flex-wrap justify-center gap-3">
+          <span ng-repeat="skill in developer.additionalSkills" class="bg-white px-4 py-2 rounded-full shadow-sm text-gray-800 hover:bg-blue-100 hover:text-blue-800 transition">{{skill}}</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects" class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-bold mb-8 text-center">Featured Projects</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div ng-repeat="project in developer.projects" class="bg-gray-100 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition transform hover:translateY(-5px)">
+          <!-- <div class="h-48 overflow-hidden">
+            <img src="/api/placeholder/400/300" alt="{{project.title}}" class="w-full h-full object-cover">
+          </div> -->
+          <div class="p-6">
+            <h3 class="text-xl font-semibold mb-2">{{project.title}}</h3>
+            <p class="text-gray-600 mb-4">{{project.description}}</p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span ng-repeat="tech in project.technologies" class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">{{tech}}</span>
+            </div>
+            <!-- <div class="flex space-x-4">
+              <a href="{{project.liveLink}}" class="text-blue-600 hover:text-blue-800 flex items-center transition">
+                <i class="fas fa-external-link-alt mr-1"></i> Live
+              </a>
+              <a href="{{project.codeLink}}" class="text-blue-600 hover:text-blue-800 flex items-center transition">
+                <i class="fab fa-github mr-1"></i> Code
+              </a>
+            </div> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience Section -->
+  <section id="experience" class="py-16 bg-gray-100">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-bold mb-8 text-center">Work Experience</h2>
+      <div class="max-w-3xl mx-auto">
+        <div ng-repeat="job in developer.experience" class="mb-8 relative pl-8 border-l-4 border-blue-600">
+          <div class="absolute left-0 top-0 w-4 h-4 bg-blue-600 rounded-full -ml-2"></div>
+          <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition">
+            <div class="flex flex-wrap justify-between items-start mb-2">
+              <h3 class="text-xl font-semibold">{{job.position}}</h3>
+              <span class="text-sm font-medium bg-blue-100 text-blue-800 px-3 py-1 rounded-full">{{job.period}}</span>
+            </div>
+            <h4 class="text-gray-600 mb-4">{{job.company}}</h4>
+            <ul class="space-y-2">
+              <li ng-repeat="responsibility in job.responsibilities" class="flex">
+                <i class="fas fa-angle-right text-blue-600 mt-1.5 mr-2"></i>
+                <span>{{responsibility}}</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-bold mb-8 text-center">Get In Touch</h2>
+      <div class="flex flex-wrap -mx-4">
+        <div class="w-full md:w-1/2 px-4 mb-8 md:mb-0">
+          <form class="bg-gray-100 p-8 rounded-lg shadow-md">
+            <div class="mb-4">
+              <label class="block text-gray-700 mb-2" for="name">Your Name</label>
+              <input type="text" id="name" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 transition">
+            </div>
+            <div class="mb-4">
+              <label class="block text-gray-700 mb-2" for="email">Your Email</label>
+              <input type="email" id="email" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 transition">
+            </div>
+            <div class="mb-4">
+              <label class="block text-gray-700 mb-2" for="message">Message</label>
+              <textarea id="message" rows="4" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 transition"></textarea>
+            </div>
+            <button type="submit" class="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition transform hover:scale-105 w-full">Send Message</button>
+          </form>
+        </div>
+        <div class="w-full md:w-1/2 px-4">
+          <div class="h-full flex flex-col justify-between">
+            <div>
+              <h3 class="text-xl font-semibold mb-4">Contact Information</h3>
+              <div class="space-y-4">
+                <div class="flex items-start">
+                  <div class="bg-blue-100 p-3 rounded-full mr-4 transition transform hover:scale-110">
+                    <i class="fas fa-envelope text-blue-600"></i>
+                  </div>
+                  <div>
+                    <h4 class="font-semibold">Email</h4>
+                    <p>{{developer.email}}</p>
+                  </div>
+                </div>
+                <div class="flex items-start">
+                  <div class="bg-blue-100 p-3 rounded-full mr-4 transition transform hover:scale-110">
+                    <i class="fas fa-map-marker-alt text-blue-600"></i>
+                  </div>
+                  <div>
+                    <h4 class="font-semibold">Location</h4>
+                    <p>{{developer.location}}</p>
+                  </div>
+                </div>
+                <div class="flex items-start">
+                  <div class="bg-blue-100 p-3 rounded-full mr-4 transition transform hover:scale-110">
+                    <i class="fas fa-phone text-blue-600"></i>
+                  </div>
+                  <div>
+                    <h4 class="font-semibold">Phone</h4>
+                    <p>{{developer.phone}}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="mt-8">
+              <h3 class="text-xl font-semibold mb-4">Connect With Me</h3>
+              <div class="flex space-x-4">
+                <a ng-repeat="social in developer.socialLinks" target="_blank" href="{{social.url}}" class="bg-gray-100 hover:bg-gray-200 p-3 rounded-full transition transform hover:scale-110" title="{{social.name}}">
+                  <i class="{{social.icon}} text-gray-700"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-white py-8">
+    <div class="container mx-auto px-4">
+      <div class="flex flex-wrap justify-between items-center">
+        <div>
+          <h3 class="text-xl font-bold">{{developer.name}}</h3>
+          <p class="text-gray-400">{{developer.title}}</p>
+        </div>
+        <div class="flex space-x-4 mt-4 md:mt-0">
+          <a ng-repeat="social in developer.socialLinks" target="_blank" href="{{social.url}}" class="hover:text-blue-400 transition transform hover:scale-110" title="{{social.name}}">
+            <i class="{{social.icon}} text-xl"></i>
+          </a>
+        </div>
+      </div>
+      <div class="border-t border-gray-800 mt-6 pt-6 text-center text-gray-400">
+        <p>&copy; {{currentYear}} {{developer.name}}. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    angular.module('portfolioApp', [])
+      .controller('PortfolioController', function($scope) {
+        $scope.mobileMenuOpen = false;
+        $scope.currentYear = new Date().getFullYear();
+        $scope.activeSection = 'home';
+        
+        $scope.toggleMobileMenu = function() {
+          $scope.mobileMenuOpen = !$scope.mobileMenuOpen;
+        };
+        
+        $scope.setActiveSection = function(section) {
+          $scope.activeSection = section;
+        };
+        
+        // Add scroll event to highlight active section
+        angular.element(window).on('scroll', function() {
+          var scrollPosition = window.scrollY;
+          
+          // Get all sections
+          var sections = document.querySelectorAll('section');
+          
+          // Check which section is currently in view
+          for (var i = 0; i < sections.length; i++) {
+            var section = sections[i];
+            var sectionTop = section.offsetTop - 100;
+            var sectionBottom = sectionTop + section.offsetHeight;
+            
+            if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+              var sectionId = section.id;
+              if (sectionId !== $scope.activeSection) {
+                $scope.activeSection = sectionId;
+                $scope.$apply();
+              }
+              break;
+            }
+          }
+        });
+        
+        $scope.developer = {
+          name: "Anbunithi AV",
+          title: "Senior Software Developer",
+          summary: "Passionate Angular developer with 5+ years of experience in Front-End Development, specializing in Angular (versions 11+), React, and Java. Expert in building high-performance, scalable web applications with modern technologies.",
+          email: "anbunithi1996@gmail.com",
+          phone: "+91-8124499042",
+          location: "India",
+          about: [
+            "I'm a seasoned Angular developer with over 5 years of professional experience building enterprise-level applications. My journey in web development started with Angular and I've grown with the framework through its evolution to Angular 12+.",
+            "I specialize in creating responsive, high-performance applications that deliver exceptional user experiences. My expertise includes state management with NgRx, unit testing with Jasmine/Karma, and creating reusable component libraries."
+          ],
+          highlights: [
+            "Proficient in analyzing business requirements and designing tailored solutions",
+            "Experienced in optimizing application code for performance and scalability",
+            "Expert in Test-Driven Development (TDD) using Jasmine/Karma & Jest",
+            "Skilled in CI/CD pipelines using Jenkins, GitLab, and Azure",
+            "Experience with Micro frontend and Angular library development",
+            "Strong knowledge of SEO and Server-Side Rendering (SSR)"
+          ],
+          coreSkills: [
+            { name: "Angular", icon: "fab fa-angular", level: 95 },
+            { name: "React", icon: "fab fa-react", level: 85 },
+            { name: "TypeScript", icon: "fab fa-js", level: 90 },
+            { name: "HTML5", icon: "fab fa-html5", level: 95 },
+            { name: "CSS3", icon: "fab fa-css3-alt", level: 90 },
+            { name: "Java", icon: "fab fa-java", level: 80 },
+            { name: "Tailwind CSS", icon: "fab fa-css3", level: 85 },
+            { name: "Next.js", icon: "fab fa-react", level: 80 }
+          ],
+          additionalSkills: [
+            "NgRx", "Spring Boot", "SQL", "Docker", "Jenkins", "GitLab", "Azure", "Bootstrap", 
+            "Material UI", "PrimeNG", "Nebular", "Grafana", "Jasmine/Karma", "Jest", "SonarQube"
+          ],
+          projects: [
+            {
+              title: "IPayout",
+              description: "An innovative online payment platform for seamless international transactions with multi-currency support",
+              technologies: ["Angular", "TypeScript", "Tailwind CSS", "NgRx", "CI/CD"],
+              liveLink: "#",
+              codeLink: "#"
+            },
+            {
+              title: "CGX",
+              description: "Online shopping application for medical instruments with secure payment processing and order tracking functionality",
+              technologies: ["Angular", "TypeScript", "Bootstrap", "RESTful APIs", "Azure"],
+              liveLink: "#",
+              codeLink: "#"
+            },
+            {
+              title: "MyActome",
+              description: "Real-time monitoring application that tracks metrics and sends automated alerts based on predefined thresholds",
+              technologies: ["Angular", "RxJS", "Material UI", "Jenkins", "Java"],
+              liveLink: "#",
+              codeLink: "#"
+            },
+            {
+              title: "RMS Portal",
+              description: "Performance tracking portal with real-time analytics and automated report generation capabilities",
+              technologies: ["Angular", "TypeScript", "Chart.js", "PrimeNG", "SQL"],
+              liveLink: "#",
+              codeLink: "#"
+            },
+            {
+              title: "Hartford",
+              description: "Tool to generate personalized maternity plans with health recommendations and tracking features",
+              technologies: ["Angular", "NgRx", "Tailwind CSS", "Spring Boot", "Docker"],
+              liveLink: "#",
+              codeLink: "#"
+            },
+            {
+              title: "Bank of New York",
+              description: "End-to-end monitoring solution for business probes with queue validation and metrics tracking",
+              technologies: ["Java", "Angular", "AppDynamics", "Splunk", "Cloud Prober"],
+              liveLink: "#",
+              codeLink: "#"
+            }
+          ],
+          experience: [
+            {
+              position: "Senior Software Developer",
+              company: "G2 Technologies",
+              period: "December 2024 - Present",
+              responsibilities: [
+                "Developing an innovative online payment platform for seamless international transactions",
+                "Ensuring compatibility with multiple currencies for global users",
+                "Leading the front-end development team using Angular and modern web technologies",
+                "Implementing best practices for performance optimization and scalability",
+                "Collaborating with cross-functional teams to deliver high-quality software solutions"
+              ]
+            },
+            {
+              position: "Software Developer",
+              company: "Mobile Programming LLC",
+              period: "January 2022 - December 2024",
+              responsibilities: [
+                "Built CGX, an online shopping app for medical instruments with secure payments and order tracking",
+                "Developed MyActome, a real-time monitoring app to track metrics and send alerts",
+                "Created RMS Portal, a performance tracking portal with real-time analytics and automated reports",
+                "Designed Hartford, a tool to generate personalized maternity plans with health recommendations",
+                "Utilized Angular, React, and related frameworks to build scalable front-end applications"
+              ]
+            },
+            {
+              position: "System Engineer",
+              company: "Tata Consultancy Services",
+              period: "August 2019 - December 2021",
+              responsibilities: [
+                "Monitored end-to-end health status for business probes for Bank of New York",
+                "Validated queues and their metrics using MQ Monitor",
+                "Configured tools like AppDynamics, Cloud Prober, and Splunk",
+                "Collaborated with global teams to implement and maintain banking solutions",
+                "Contributed to continuous improvement initiatives and performance optimizations"
+              ]
+            },
+            {
+              position: "Software Developer Intern",
+              company: "Vivasa Information System",
+              period: "July 2017 - December 2017",
+              responsibilities: [
+                "Designed and developed a web application using Angular",
+                "Ensured continuous integration using Jenkins for timely builds and testing",
+                "Collaborated with senior developers to implement features and fix bugs",
+                "Gained hands-on experience with front-end development technologies",
+                "Participated in code reviews and testing processes"
+              ]
+            }
+          ],
+          socialLinks: [
+            { name: "LinkedIn", icon: "fab fa-linkedin", url: "https://linkedin.com/in/anbunithi-av-325a89144" },
+            { name: "GitHub", icon: "fab fa-github", url: "https://github.com/anbunithi?tab=projects" },
+            // { name: "Twitter", icon: "fab fa-twitter", url: "#" }
+          ],
+          education: {
+            degree: "M.Sc. Software Systems (Integrated)",
+            institution: "PSG College of Arts and Science, Coimbatore",
+            gpa: "83%",
+            period: "June 2014 - April 2019"
+          }
+        };
+      });
+  </script>
 </body>
 </html>
