@@ -1,0 +1,19 @@
+<footer class="bg-gray-900 text-white py-8">
+  <div class="container mx-auto px-4">
+    <div class="flex flex-wrap justify-between items-center">
+      <div>
+        <h3 class="text-xl font-bold">{{ developer.name }}</h3>
+        <p class="text-gray-400">{{ developer.title }}</p>
+      </div>
+      <div class="flex space-x-4 mt-4 md:mt-0">
+        <a *ngFor="let social of developer.socialLinks" target="_blank" [href]="social.url"
+          class="hover:text-blue-400 transition transform hover:scale-110" [title]="social.name">
+          <i class="{{ social.icon }} text-xl"></i>
+        </a>
+      </div>
+    </div>
+    <div class="border-t border-gray-800 mt-6 pt-6 text-center text-gray-400">
+      <p>&copy; {{ currentYear }} {{ developer.name }}. All rights reserved.</p>
+    </div>
+  </div>
+</footer>

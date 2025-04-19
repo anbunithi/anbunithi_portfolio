@@ -1,0 +1,41 @@
+<!-- Navigation -->
+<nav class="bg-gray-900 text-white shadow-lg fixed w-full z-10">
+  <div class="container mx-auto px-4">
+    <div class="flex justify-between items-center py-4">
+      <div>
+        <a href="#home" class="text-xl font-bold">{{ developer.name }}</a>
+      </div>
+      <div class="hidden md:flex space-x-8">
+        <a
+          *ngFor="let section of sections"
+          [href]="'#' + section.id"
+          class="nav-link"
+          [class.active]="activeSection === section.id"
+          (click)="setActiveSection(section.id)"
+        >
+          {{ section.name }}
+        </a>
+      </div>
+      <div class="md:hidden">
+        <button (click)="toggleMobileMenu()" class="focus:outline-none p-2 rounded-md hover:bg-gray-800 transition">
+          <i class="fas" [ngClass]="{ 'fa-bars': !mobileMenuOpen, 'fa-times': mobileMenuOpen }"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+  <!-- Mobile menu -->
+  <div
+    class="mobile-menu md:hidden bg-gray-800"
+    [ngClass]="{ 'block': mobileMenuOpen, 'hidden': !mobileMenuOpen }"
+  >
+    <a
+      *ngFor="let section of sections"
+      [href]="'#' + section.id"
+      class="mobile-link block py-3 px-4 hover:text-blue-400 transition"
+      [class.text-blue-400]="activeSection === section.id"
+      (click)="setActiveSection(section.id); toggleMobileMenu()"
+    >
+      {{ section.name }}
+    </a>
+  </div>
+</nav>
