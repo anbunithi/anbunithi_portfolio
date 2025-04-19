@@ -1,27 +1,42 @@
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { Title } from '@angular/platform-browser';
+import { NavComponent } from './nav/nav.component';
+import { SectionsComponent } from './sections/sections.component';
+import { FooterComponent } from './footer/footer.component';
 
 describe('AppComponent', () => {
   beforeEach(() => TestBed.configureTestingModule({
     declarations: [AppComponent]
   }));
 
-  it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
+  it('should have the correct selector', () => {
+    const metadata = (AppComponent as any).__annotations__[0];
+    expect(metadata.selector).toBe('app-root');
   });
 
-  it(`should have as title 'angular-tailwind-app'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('angular-tailwind-app');
-  });
+  describe('AppComponent', () => {
+    let titleService: Title;
 
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('angular-tailwind-app app is running!');
+    beforeEach(() => {
+      TestBed.configureTestingModule({
+        declarations: [AppComponent, NavComponent, SectionsComponent, FooterComponent],
+        providers: [Title]
+      });
+
+      titleService = TestBed.inject(Title);
+    });
+
+    it('should have the correct selector', () => {
+      const metadata = (AppComponent as any).__annotations__[0];
+      expect(metadata.selector).toBe('app-root');
+    });
+
+    it('should set the correct title on initialization', () => {
+      const titleSpy = jest.spyOn(titleService, 'setTitle');
+      const fixture = TestBed.createComponent(AppComponent);
+      fixture.detectChanges();
+      expect(titleSpy).toHaveBeenCalledWith('Anbunithi AV - Angular Developer Portfolio');
+    });
   });
 });

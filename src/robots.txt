@@ -1,2 +1,19 @@
+# Allow all user agents to crawl the site
 User-agent: *
 Allow: /
+
+# Disallow access to Angular-specific files and folders
+Disallow: /node_modules/
+Disallow: /src/
+Disallow: /environment.ts
+Disallow: /angular.json
+Disallow: /package.json
+Disallow: /package-lock.json
+
+# Disallow access to temporary or build files
+Disallow: /dist/
+Disallow: /.git/
+Disallow: /.vscode/
+
+# Specify the location of the sitemap
+Sitemap: https://anbunithiportfolio.web.app/sitemap.xml
