@@ -1,22 +1,56 @@
-/* You can add global styles to this file, and also import other style files */
+/* TailwindCSS base, components, and utilities */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* Define light theme variables */
+:root {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f3f4f6;
+  --text-primary: #1f2937;
+  --text-secondary: #4b5563;
+  --primary-color: #2563eb;
+  --primary-hover: #1d4ed8;
+  --border-color: #e5e7eb;
+  --card-bg: #ffffff;
+  --navbar-bg: #1f2937;
+  --navbar-text: #ffffff;
+  --footer-bg: #1f2937;
+  --footer-text: #ffffff;
+  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+/* Define dark theme variables */
+.dark-theme {
+  --bg-primary: #111827;
+  --bg-secondary: #1f2937;
+  --text-primary: #f9fafb;
+  --text-secondary: #d1d5db;
+  --primary-color: #3b82f6;
+  --primary-hover: #60a5fa;
+  --border-color: #374151;
+  --card-bg: #1f2937;
+  --navbar-bg: #0f172a;
+  --navbar-text: #f9fafb;
+  --footer-bg: #0f172a;
+  --footer-text: #f9fafb;
+  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+}
+
+/* Active navigation link styles */
 .active-nav-link {
-    color: #38bdf8;
-    /* Tailwind's blue-400 */
-    font-weight: bold;
-    border-bottom: 2px solid #38bdf8;
-    /* Underline effect */
-    transition: all 0.3s ease-in-out;
+  color: var(--primary-color);
+  font-weight: bold;
+  border-bottom: 2px solid var(--primary-color);
+  transition: all 0.3s ease-in-out;
 }
 
+/* Smooth scrolling for the entire page */
 html {
-    scroll-behavior: smooth;
+  scroll-behavior: smooth;
 }
 
-/* Menu hover and active state animations */
+/* Navigation link hover and active state animations */
 .nav-link {
   position: relative;
   transition: all 0.3s ease;
@@ -29,7 +63,7 @@ html {
   height: 2px;
   bottom: -4px;
   left: 0;
-  background-color: #60a5fa; /* blue-400 */
+  background-color: var(--primary-color);
   transition: width 0.3s ease;
 }
 
@@ -38,7 +72,7 @@ html {
 }
 
 .nav-link.active {
-  color: #60a5fa; /* blue-400 */
+  color: var(--primary-color);
 }
 
 .nav-link.active:after {
@@ -68,43 +102,9 @@ html {
 }
 
 .mobile-link:hover {
-  border-left: 4px solid #60a5fa; /* blue-400 */
+  border-left: 4px solid var(--primary-color);
   padding-left: 1rem;
   background-color: rgba(255, 255, 255, 0.1);
-}
-
-/* Light theme (default) */
-:root {
-  --bg-primary: #ffffff;
-  --bg-secondary: #f3f4f6;
-  --text-primary: #1f2937;
-  --text-secondary: #4b5563;
-  --primary-color: #2563eb;
-  --primary-hover: #1d4ed8;
-  --border-color: #e5e7eb;
-  --card-bg: #ffffff;
-  --navbar-bg: #1f2937;
-  --navbar-text: #ffffff;
-  --footer-bg: #1f2937;
-  --footer-text: #ffffff;
-  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-}
-
-/* Dark theme */
-.dark-theme {
-  --bg-primary: #111827;
-  --bg-secondary: #1f2937;
-  --text-primary: #f9fafb;
-  --text-secondary: #d1d5db;
-  --primary-color: #3b82f6;
-  --primary-hover: #60a5fa;
-  --border-color: #374151;
-  --card-bg: #1f2937;
-  --navbar-bg: #0f172a;
-  --navbar-text: #f9fafb;
-  --footer-bg: #0f172a;
-  --footer-text: #f9fafb;
-  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
 }
 
 /* Apply theme variables to elements */
@@ -132,7 +132,9 @@ footer.bg-gray-900 {
   background-color: var(--bg-secondary);
 }
 
-.text-gray-600, .text-gray-700, .text-gray-800 {
+.text-gray-600,
+.text-gray-700,
+.text-gray-800 {
   color: var(--text-secondary);
 }
 
@@ -152,7 +154,8 @@ footer.bg-gray-900 {
   border-color: var(--border-color);
 }
 
-.shadow-md, .shadow-lg {
+.shadow-md,
+.shadow-lg {
   box-shadow: var(--shadow);
 }
 
@@ -166,6 +169,8 @@ footer.bg-gray-900 {
 }
 
 /* Transition effect for theme changes */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }

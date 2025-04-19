@@ -1,7 +1,7 @@
 export const developer = {
     name: "Anbunithi AV",
     title: "Senior Software Engineer",
-    summary: "Results-driven Senior Software Engineer with 6+ years of experience in full-stack and front-end development, specializing in Angular, React, Java, and the MEAN stack. Expert in building high-performance, scalable web applications with modern technologies.",
+    summary: "Results-driven Senior Software Engineer with 6 years of experience in full-stack and front-end development, specializing in Angular, React, Java, and the MEAN stack. Expert in building high-performance, scalable web applications with modern technologies.",
     email: "anbunithi1996@gmail.com",
     phone: "+91-8124499042",
     location: "India",
