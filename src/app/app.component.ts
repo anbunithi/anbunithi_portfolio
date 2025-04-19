@@ -8,10 +8,10 @@ import { ThemeService } from './services/shared/theme.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  constructor(private titleService: Title, private themeService: ThemeService) {
-    this.titleService.setTitle('Anbunithi AV - Angular Developer Portfolio');
+  constructor(private titleService: Title,  private themeService: ThemeService) {
   }
   ngOnInit() {
+    this.titleService.setTitle('Anbunithi AV - Angular Developer Portfolio');
     // Listen for system theme preference changes
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
       if (!localStorage.getItem('theme')) {
@@ -20,5 +20,5 @@ export class AppComponent {
         this.themeService['setTheme'](darkModeOn);
       }
     });
-  }
+}
 }

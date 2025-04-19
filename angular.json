@@ -82,6 +82,7 @@
               "zone.js",
               "zone.js/testing"
             ],
+            "configPath": "jest.config.js",
             "tsConfig": "tsconfig.spec.json"
           }
         }
