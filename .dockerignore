@@ -1,0 +1,11 @@
+node_modules
+npm-debug.log
+dist
+.git
+.github
+e2e
+.editorconfig
+.gitignore
+.firebase
+firebase.json
+.firebaserc
