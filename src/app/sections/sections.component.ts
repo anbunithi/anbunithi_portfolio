@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
+
 import { developer } from '../data/portfolio.data';
 import { ScrollService } from '../services/shared/scroll.service';
 
 @Component({
   selector: 'app-sections',
+  imports: [],
   templateUrl: './sections.component.html',
   styleUrls: ['./sections.component.css']
 })
@@ -13,8 +15,8 @@ export class SectionsComponent {
   mobileMenuOpen: boolean = false;
   activeSection: string = 'home';
   showMessagePopup: boolean = false;
-  
-  constructor(private scrollService: ScrollService) {}
+
+  constructor(private scrollService: ScrollService) { }
 
   ngOnInit(): void {
     this.scrollService.activeSection$.subscribe((section) => {
@@ -26,7 +28,7 @@ export class SectionsComponent {
     event.preventDefault();
     this.showMessagePopup = true;
   }
-  
+
   closeMessagePopup(): void {
     this.showMessagePopup = false;
   }

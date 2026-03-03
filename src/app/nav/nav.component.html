@@ -6,31 +6,32 @@
         <a href="#home" class="text-xl font-bold">{{ developer.name }}</a>
       </div>
       <div class="hidden md:flex space-x-8 items-center">
-        <a
-          *ngFor="let section of sections"
-          [href]="'#' + section.id"
-          class="nav-link"
-          [class.active]="activeSection === section.id"
-          (click)="setActiveSection(section.id)"
-        >
-          {{ section.name }}
-        </a>
+        @for (section of sections; track section) {
+          <a
+            [href]="'#' + section.id"
+            class="nav-link"
+            [class.active]="activeSection === section.id"
+            (click)="setActiveSection(section.id)"
+            >
+            {{ section.name }}
+          </a>
+        }
         <!-- Theme Toggle Button -->
-        <button 
-          (click)="toggleTheme()" 
+        <button
+          (click)="toggleTheme()"
           class="theme-toggle p-2 rounded-full hover:bg-gray-800 transition focus:outline-none"
           [title]="isDarkTheme ? 'Switch to Light Theme' : 'Switch to Dark Theme'"
-        >
+          >
           <i class="fas w-4 h-4" [ngClass]="{'fa-moon': !isDarkTheme, 'fa-sun': isDarkTheme}"></i>
         </button>
       </div>
       <div class="md:hidden flex items-center">
         <!-- Theme Toggle for Mobile -->
-        <button 
-          (click)="toggleTheme()" 
+        <button
+          (click)="toggleTheme()"
           class="theme-toggle p-2 rounded-full hover:bg-gray-800 transition focus:outline-none mr-3"
           [title]="isDarkTheme ? 'Switch to Light Theme' : 'Switch to Dark Theme'"
-        >
+          >
           <i class="fas w-4 h-4" [ngClass]="{'fa-moon': !isDarkTheme, 'fa-sun': isDarkTheme}"></i>
         </button>
         <!-- Mobile Menu Toggle -->
@@ -44,15 +45,16 @@
   <div
     class="mobile-menu md:hidden bg-gray-800"
     [ngClass]="{ 'block': mobileMenuOpen, 'hidden': !mobileMenuOpen }"
-  >
-    <a
-      *ngFor="let section of sections"
-      [href]="'#' + section.id"
-      class="mobile-link block py-3 px-4 hover:text-blue-400 transition"
-      [class.text-blue-400]="activeSection === section.id"
-      (click)="setActiveSection(section.id); toggleMobileMenu()"
     >
-      {{ section.name }}
-    </a>
+    @for (section of sections; track section) {
+      <a
+        [href]="'#' + section.id"
+        class="mobile-link block py-3 px-4 hover:text-blue-400 transition"
+        [class.text-blue-400]="activeSection === section.id"
+        (click)="setActiveSection(section.id); toggleMobileMenu()"
+        >
+        {{ section.name }}
+      </a>
+    }
   </div>
 </nav>

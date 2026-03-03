@@ -1,14 +1,18 @@
 import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
+import { NavComponent } from './nav/nav.component';
+import { FooterComponent } from './footer/footer.component';
+import { SectionsComponent } from './sections/sections.component';
 import { ThemeService } from './services/shared/theme.service';
 
 @Component({
   selector: 'app-root',
+  imports: [NavComponent, FooterComponent, SectionsComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  constructor(private titleService: Title,  private themeService: ThemeService) {
+  constructor(private titleService: Title, private themeService: ThemeService) {
   }
   ngOnInit() {
     this.titleService.setTitle('Anbunithi AV - Angular Developer Portfolio');
@@ -20,5 +24,5 @@ export class AppComponent {
         this.themeService['setTheme'](darkModeOn);
       }
     });
-}
+  }
 }

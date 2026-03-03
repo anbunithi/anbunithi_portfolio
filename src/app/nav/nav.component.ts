@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { developer } from '../data/portfolio.data';
 import { section } from '../data/section.data';
 import { ScrollService } from '../services/shared/scroll.service';
@@ -6,6 +7,7 @@ import { ThemeService } from '../services/shared/theme.service';
 
 @Component({
   selector: 'app-nav',
+  imports: [CommonModule],
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.css']
 })
@@ -18,13 +20,13 @@ export class NavComponent {
   constructor(
     private scrollService: ScrollService,
     private themeService: ThemeService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.scrollService.activeSection$.subscribe((section) => {
       this.activeSection = section;
     });
-    
+
     this.themeService.isDarkTheme$.subscribe(isDark => {
       this.isDarkTheme = isDark;
     });
