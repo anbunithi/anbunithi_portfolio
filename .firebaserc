@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "anbunithiportfolio"
-  }
+    "default": "anbunithiportfolio",
+    "updating": "anbunithiportfolio"
+  },
+  "targets": {},
+  "etags": {}
 }
